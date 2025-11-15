@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario y Tabla de Oficios</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <!--Tabla de registros-->
+    <h2>Tabla de registro</h2>
+    <table class="tablaindex" border="2">
+        <tr>
+            <th>Numero oficio</th>
+            <th>Nombre</th>
+            <th>Seccion</th>
+            <th>Asunto</th>
+            <th>Fecha</th>
+            <th>Hash</th>
+            <th>Opciones</th>
+        </tr>
+        <% oficios.forEach(oficio => { %>
+            <tr>
+                <td><%= oficio.numero_oficio %></td>
+                <td><%= oficio.nombre %></td>
+                <td><%= oficio.seccion %></td>
+                <td><%= oficio.asunto %></td>
+                <td><%= oficio.fecha%></td>
+                <td><%= oficio.hash %></td>
+                <td>
+                    <a href="/edit/<%=oficio.numero_oficio%>">Editar</a>
+                    <br><br>
+                    <a href="/delete/<%=oficio.numero_oficio%>">Eliminar</a>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+
+    <!--Formulario-->
+    <h2>Agregar Nuevo Oficio</h2>
+    <div class="agregar">
+        <form class="form" action="/add" method="post">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="name" name="nombre" required maxlength="45" 
+            placeholder="Nombre">
+            <br><br>
+
+            <label for="seccion">Sección</label>
+            <input type="text" id="seccion" name="seccion" maxlength="45">
+            <br><br>
+
+            <label for="asunto">Asunto</label>
+            <input type="text" id="asunto" name="asunto" maxlength="100">
+            <br><br>
+            
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha">
+            <br><br>
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+    
+
+</body>
+</html>
