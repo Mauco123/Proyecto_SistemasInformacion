@@ -16,6 +16,27 @@ function generarHash(numero_oficio,nombre, seccion, asunto, fecha) {
     return crypto.createHash('sha256').update(data).digest('hex');
 }
 
+
+
+router.get('/', (req, res) => {
+    console.log(`[LOG] Usuario ${req.session.username} pidiendo GET /`); // <-- AÑADE ESTO
+
+    const consulta = 'SELECT * FROM oficio';
+
+    db.query(consulta, (err, results) => {
+        console.log("[LOG] Callback de 'SELECT * FROM oficio' EJECUTADO."); // <-- AÑADE ESTO
+
+        if (err) {
+            console.error('Error al consultar la base de datos:', err);
+            res.send('Error, por favor contacta a soporte técnico.');
+        } else {
+            console.log(`[LOG] Renderizando index.ejs con ${results.length} oficios.`); // <-- AÑADE ESTO
+            res.render('index', { oficios: results, username: req.session.username }); // <-- Pasé el username
+        }
+    });
+});
+
+/*
 // CAMBIO 2: Usar 'router.get' en lugar de 'app.get' (y así con post, etc.)
 router.get('/', (req, res) => {
     const consulta = 'SELECT * FROM oficio';
@@ -34,6 +55,10 @@ router.get('/', (req, res) => {
         }
     });
 });
+*/
+
+
+
 
 //Agregar un nuevo oficio
 router.post('/add', (req, res) => {
