@@ -5,7 +5,7 @@ const mysql = require('mysql2');
 const pool = mysql.createPool({
     connectionLimit: 10, // Límite de conexiones (esto es correcto aquí)
     host: 'localhost',
-    user: 'root',
+    user: 'admin_fes',
     password: '123456',
     database: 'oficios_fes_aragon',
     port: 3306
